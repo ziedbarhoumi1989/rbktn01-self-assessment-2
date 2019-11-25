@@ -31,7 +31,23 @@
 var Tree = function(value) {
   this.value = value;
   this.children = [];
-};
+ }
+  Tree.prototype.addChild = function(val) {
+    var child = new Tree(val)
+    this.children.push(child)
+    return child
+  }
+  Tree.prototype.map = function(cb) {
+    this.value = cb(this.value)
+    for(var child of this.children){
+      cb(child.value)
+      if(child.children.length>0){
+        child.map(cb)
+      }
+    }
+    return this
+  }
+;
 
 
 
